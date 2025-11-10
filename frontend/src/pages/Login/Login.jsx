@@ -40,6 +40,10 @@ export default function Login() {
     }
   };
 
+  const handleSignup = () => {
+    navigate("/signup");
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="bg-white p-8 rounded-md h-auto  shadow-md w-full max-w-md">
@@ -95,7 +99,10 @@ export default function Login() {
         <div className="text-center">
           <p>
             Don't have an account?{" "}
-            <span className="text-[#094067] cursor-pointer hover:text-[#083156]">
+            <span
+              onClick={handleSignup}
+              className="text-[#094067] cursor-pointer hover:text-[#083156]"
+            >
               Sign Up
             </span>
           </p>
