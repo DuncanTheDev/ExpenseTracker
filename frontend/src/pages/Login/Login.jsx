@@ -21,6 +21,12 @@ export default function Login() {
     e.preventDefault();
     setErrMsg("");
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(login.email)) {
+      setErrMsg("Invalid email address.");
+      return;
+    }
+
     if (!login.email || !login.password) {
       setErrMsg("Email and Password are required!");
       return;
@@ -73,8 +79,8 @@ export default function Login() {
           <div className="relative">
             <IoLockClosedOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#5f6c7b] text-2xl" />
             <input
-              type="email"
-              id="email"
+              type="password"
+              name="password"
               value={login.password}
               onChange={handleChange}
               placeholder="Enter Your Password"
@@ -85,7 +91,7 @@ export default function Login() {
 
         {errMsg && <p className="mb-6 text-center text-red-600">{errMsg}</p>}
         <button
-          class="w-full bg-[#094067] text-white py-2 rounded-lg cursor-pointer hover:opacity-90 active:bg-[#083156] transition duration-150 mb-6"
+          className="w-full bg-[#094067] text-white py-2 rounded-lg cursor-pointer hover:opacity-90 active:bg-[#083156] transition duration-150 mb-6"
           onClick={handleLogin}
         >
           Sign In
