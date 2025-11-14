@@ -12,10 +12,11 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users, email',
+            'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        $validated['password'] = bcrypt($validated['password']);
         $user = User::create($validated);
 
         $token = $user->createToken($validated['email'])->plainTextToken;

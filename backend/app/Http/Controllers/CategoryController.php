@@ -27,8 +27,8 @@ class CategoryController extends Controller
 
         $category = Category::create([
             'user_id' => $user,
-            $validated['name'],
-            $validated['type'],
+            'name' => $validated['name'],
+            'type' => $validated['type'],
         ]);
 
         return response()->json([
