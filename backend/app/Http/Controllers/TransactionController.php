@@ -21,8 +21,8 @@ class TransactionController extends Controller
             $query->where('category_id', $request->category_id);
         }
 
-        if ($request->has('date')) {
-            $query->whereDate('transaction_date', $request->date);
+        if ($request->has('transaction_date')) {
+            $query->whereDate('transaction_date', $request->transaction_date);
         }
 
         if ($request->has('search')) {
@@ -30,7 +30,8 @@ class TransactionController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('type', 'like', "%$search%")
                     ->orWhere('description', 'like', "%$search%")
-                    ->orWhere('date', 'like', "%$search%")
+                    ->orWhere('amount', 'like', "%$search%")
+                    ->orWhere('transaction_date', 'like', "%$search%")
                     ->orWhereHas('category', function ($subQ) use ($search) {
                         $subQ->where('name', 'like', "%$search%");
                     });
