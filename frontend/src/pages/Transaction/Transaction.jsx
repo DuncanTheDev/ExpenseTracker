@@ -190,56 +190,62 @@ export default function Transaction() {
 
                 {/**Table body */}
                 <tbody>
-                  {transactions.map((t) => (
-                    <tr key={t.id} className="border-t border-gray-200">
-                      {/**Date */}
-                      <td className="px-6 py-4">{t.transaction_date}</td>
-                      {/**category */}
-                      <td className="px-6 py-4">
-                        {t.category?.name || t.category}
-                      </td>
-                      {/**Description */}
-                      <td className="px-6 py-4">{t.description}</td>
-                      {/**Amount */}
-                      <td
-                        className={`px-6 py-4 ${
-                          t.type === "income"
-                            ? "text-green-600"
-                            : "text-red-600"
-                        }`}
-                      >
-                        {t.type === "income"
-                          ? `+₱${t.amount}`
-                          : `-₱${t.amount}`}
-                      </td>
-                      {/**Type */}
-                      <td className="px-6 py-4">
-                        <span
-                          className={`${
+                  {transactions
+                    .sort(
+                      (a, b) =>
+                        new Date(b.transaction_date) -
+                        new Date(a.transaction_date)
+                    )
+                    .map((t) => (
+                      <tr key={t.id} className="border-t border-gray-200">
+                        {/**Date */}
+                        <td className="px-6 py-4">{t.transaction_date}</td>
+                        {/**category */}
+                        <td className="px-6 py-4">
+                          {t.category?.name || t.category}
+                        </td>
+                        {/**Description */}
+                        <td className="px-6 py-4">{t.description}</td>
+                        {/**Amount */}
+                        <td
+                          className={`px-6 py-4 ${
                             t.type === "income"
-                              ? "bg-green-100 text-green-800 px-2 py-1 rounded"
-                              : "bg-red-100 text-red-800 px-2 py-1 rounded"
+                              ? "text-green-600"
+                              : "text-red-600"
                           }`}
                         >
-                          {t.type}
-                        </span>
-                      </td>
-                      {/**Action */}
-                      <td className="px-6 py-4">
-                        <div className="space-x-2">
-                          <button className="bg-[#094067] p-1 rounded-md text-white">
-                            <MdEdit />
-                          </button>
-                          <button
-                            className="bg-red-600 p-1 rounded-md text-white cursor-pointer"
-                            onClick={() => handleDelete(t.id)}
+                          {t.type === "income"
+                            ? `+₱${t.amount}`
+                            : `-₱${t.amount}`}
+                        </td>
+                        {/**Type */}
+                        <td className="px-6 py-4">
+                          <span
+                            className={`${
+                              t.type === "income"
+                                ? "bg-green-100 text-green-800 px-2 py-1 rounded"
+                                : "bg-red-100 text-red-800 px-2 py-1 rounded"
+                            }`}
                           >
-                            <MdDelete />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
+                            {t.type}
+                          </span>
+                        </td>
+                        {/**Action */}
+                        <td className="px-6 py-4">
+                          <div className="space-x-2">
+                            <button className="bg-[#094067] p-1 rounded-md text-white">
+                              <MdEdit />
+                            </button>
+                            <button
+                              className="bg-red-600 p-1 rounded-md text-white cursor-pointer"
+                              onClick={() => handleDelete(t.id)}
+                            >
+                              <MdDelete />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
