@@ -145,7 +145,7 @@ export default function Category() {
                 Expense Categories
               </h3>
 
-              {expenseCategories === 0 && (
+              {totalExpenseCategories === 0 && (
                 <p className="text-center">No expense category</p>
               )}
 
