@@ -6,6 +6,8 @@ import Signup from "./pages/Signup/Signup";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Transaction from "./pages/Transaction/Transaction";
 import Category from "./pages/Category/Category";
+import Report from "./pages/Report/Report";
+import Setting from "./pages/Setting/Setting";
 
 export default function App() {
   return (
@@ -34,6 +36,22 @@ export default function App() {
           element={
             <ProtectedRoute>
               <Category />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute>
+              <Report />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Setting />
             </ProtectedRoute>
           }
         />
