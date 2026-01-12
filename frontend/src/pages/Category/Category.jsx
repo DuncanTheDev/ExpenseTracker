@@ -9,6 +9,7 @@ import "aos/dist/aos.css";
 import AddCategoryModal from "../../components/CategoryModal/AddCategory";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
+import UpdateCategory from "../../components/CategoryModal/UpdateCategory";
 import api from "../../axios/axios";
 
 import { useState, useEffect } from "react";
@@ -16,6 +17,8 @@ import { useState, useEffect } from "react";
 export default function Category() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   {
     /**Fetch categories */
@@ -107,7 +110,7 @@ export default function Category() {
 
           <div className="grid grid-cols-3 gap-6">
             {/*Income Categories Section */}
-            <div className="border border-gray-200 bg-white rounded-md p-2">
+            <div className="border border-gray-200 bg-white rounded-md p-2 cursor-pointer">
               <h3 className="text-lg font-semibold text-green-600 text-center mb-4">
                 Income Categories
               </h3>
@@ -125,7 +128,13 @@ export default function Category() {
 
                   {/**Action button */}
                   <div className="space-x-2">
-                    <button className="bg-[#094067] p-1 rounded-md text-white">
+                    <button
+                      className="bg-[#094067] p-1 rounded-md text-white cursor-pointer"
+                      onClick={() => {
+                        setSelectedCategory(cat);
+                        setIsUpdateOpen(true);
+                      }}
+                    >
                       <MdEdit />
                     </button>
                     <button
@@ -158,7 +167,13 @@ export default function Category() {
 
                   {/**Action button */}
                   <div className="space-x-2">
-                    <button className="bg-[#094067] p-1 rounded-md text-white">
+                    <button
+                      className="bg-[#094067] p-1 rounded-md text-white cursor-pointer"
+                      onClick={() => {
+                        setSelectedCategory(cat);
+                        setIsUpdateOpen(true);
+                      }}
+                    >
                       <MdEdit />
                     </button>
                     <button
@@ -193,6 +208,12 @@ export default function Category() {
           </div>
         </main>
       </div>
+      <UpdateCategory
+        isOpen={isUpdateOpen}
+        onClose={() => setIsUpdateOpen(false)}
+        refreshCategory={fetchCategory}
+        selectedCategory={selectedCategory}
+      />
     </div>
   );
 }
