@@ -50,6 +50,12 @@ export default function Login() {
     navigate("/signup");
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleLogin(e);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="bg-white p-8 rounded-md h-auto  shadow-md w-full max-w-md">
@@ -68,6 +74,7 @@ export default function Login() {
               name="email"
               value={login.email}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
               placeholder="Enter Your Email"
               className="w-full pl-10 pr-2 border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#094067]"
             />
@@ -83,6 +90,7 @@ export default function Login() {
               name="password"
               value={login.password}
               onChange={handleChange}
+              onKeyDown={handleKeyDown}
               placeholder="Enter Your Password"
               className="w-full pl-10 pr-2 border border-gray-300 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#094067]"
             />
