@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import Navbar from "../../components/Navbar/Navbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import AddTransaction from "../../components/TransactionModal/AddTransaction";
+import UpdateTransaction from "../../components/TransactionModal/UpdateTransactions";
 import api from "../../axios/axios";
 
 import AOS from "aos";
@@ -19,6 +20,8 @@ export default function Transaction() {
   const [filterCategory, setFilterCategory] = useState("");
   const [filterTransactionDate, setFilterTransactionDate] = useState("");
   const [search, setSearch] = useState("");
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   {
     /**Fetching categories for the drop down */
@@ -74,7 +77,8 @@ export default function Transaction() {
     if (!isConfirmed) return;
 
     try {
-      const response = await api.delete(`/transaction/${id}`);
+      await api.delete(`/transaction/${id}`);
+
       fetchTransactions();
     } catch (err) {
       console.error("Failed to delete transaction: ", err);
@@ -233,7 +237,13 @@ export default function Transaction() {
                         {/**Action */}
                         <td className="px-6 py-4">
                           <div className="space-x-2">
-                            <button className="bg-[#094067] p-1 rounded-md text-white">
+                            <button
+                              className="bg-[#094067] p-1 rounded-md text-white cursor-pointer"
+                              onClick={() => {
+                                setSelectedTransaction(t);
+                                setIsUpdateOpen(true);
+                              }}
+                            >
                               <MdEdit />
                             </button>
                             <button
@@ -252,6 +262,12 @@ export default function Transaction() {
           </div>
         </main>
       </div>
+      <UpdateTransaction
+        isOpen={isUpdateOpen}
+        onClose={() => setIsUpdateOpen(false)}
+        refreshTransaction={fetchTransactions}
+        selectedTransaction={selectedTransaction}
+      />
     </div>
   );
 }
