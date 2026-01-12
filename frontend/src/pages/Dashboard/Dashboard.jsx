@@ -124,7 +124,7 @@ export default function Dashboard() {
 
             <div className="grid grid-cols-2 gap-4 pb-6">
               {/* INCOME PIE */}
-              <div className="h-64 overflow-visible">
+              <div className="h-100 overflow-visible">
                 <h3 className="text-center font-medium mb-2">
                   Income by Category
                 </h3>
@@ -155,7 +155,7 @@ export default function Dashboard() {
               </div>
 
               {/* EXPENSE PIE */}
-              <div className="h-64 overflow-visible">
+              <div className="h-100 overflow-visible">
                 <h3 className=" text-center font-medium mb-2">
                   Expense by Category
                 </h3>
